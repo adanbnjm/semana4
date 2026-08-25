@@ -21,7 +21,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.get("/api/menu", async (req, res) => {
   try {
-    console.log("DB:", process.env.DB_NAME);
     const result = await pool.query("SELECT * FROM producto");
     res.json(result.rows);
   } catch (error) {
