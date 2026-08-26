@@ -1,7 +1,8 @@
 import express, { type Request, type Response } from "express";
 import swaggerRouter from "./routes/swagger.router.js";
+import productRouter from "./routes/product.routes.js";
 import cors from "cors";
-import pool from "./config/db.js";
+
 const port = process.env.PORT;
 
 const app = express();
@@ -11,22 +12,14 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/docs", swaggerRouter);
+app.use("/api", productRouter);
 
 app.get("/", (req: Request, res: Response) => {
   /*#swagger.tags = ['Tests']*/
   res.json({
-    status: "Server online",
+    status: "server en linea",
     version: "1.0.0",
   });
-});
-app.get("/api/menu", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM producto");
-    res.json(result.rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al obtener los productos" });
-  }
 });
 
 app.listen(port, () => {
