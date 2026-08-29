@@ -31,6 +31,23 @@
         ],
         "summary": "Obtener todos los productos",
         "description": "",
+        "parameters": [
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -147,6 +164,10 @@
     },
     "/api/customers": {
       "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Obtener todos los clientes",
         "description": "",
         "responses": {
           "200": {
@@ -158,6 +179,10 @@
         }
       },
       "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Crear un nuevo cliente",
         "description": "",
         "parameters": [
           {
@@ -194,6 +219,10 @@
     },
     "/api/customers/{id}": {
       "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Obtener un cliente por ID",
         "description": "",
         "parameters": [
           {
@@ -216,6 +245,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Actualizar un cliente",
         "description": "",
         "parameters": [
           {
@@ -249,6 +282,86 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/sales": {
+      "get": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Obtener todas las ventas",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Crear una nueva venta",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fecha": {
+                  "example": "any"
+                },
+                "total": {
+                  "example": "any"
+                },
+                "id_cliente": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/sales/{id}": {
+      "get": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Obtener una venta por ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "404": {
             "description": "Not Found"

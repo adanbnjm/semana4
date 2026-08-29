@@ -8,7 +8,11 @@ import {
 } from "../models/customer.model.js";
 
 // GET /api/customers
-export async function obtenerClientesController(req: Request, res: Response) {
+export async function obtenerClientesController(
+  req: Request,
+  res: Response,
+) /*#swagger.tags = ['Customers']
+  #swagger.summary = 'Obtener todos los clientes' */ {
   try {
     const clientes = await obtenerClientes();
 
@@ -23,7 +27,11 @@ export async function obtenerClientesController(req: Request, res: Response) {
 }
 
 // GET /api/customers/:id
-export async function obtenerClientePorId(req: Request, res: Response) {
+export async function obtenerClientePorId(
+  req: Request,
+  res: Response,
+) /*#swagger.tags = ['Customers']
+  #swagger.summary = 'Obtener un cliente por ID' */ {
   try {
     const id = Number(req.params.id);
 
@@ -46,7 +54,11 @@ export async function obtenerClientePorId(req: Request, res: Response) {
 }
 
 // POST /api/customers
-export async function crearCliente(req: Request, res: Response) {
+export async function crearCliente(
+  req: Request,
+  res: Response,
+) /*#swagger.tags = ['Customers']
+  #swagger.summary = 'Crear un nuevo cliente' */ {
   try {
     const { nombre, email, telefono } = req.body;
 
@@ -61,7 +73,11 @@ export async function crearCliente(req: Request, res: Response) {
     });
   }
 }
-export async function actualizarCliente(req: Request, res: Response) {
+export async function actualizarCliente(
+  req: Request,
+  res: Response,
+) /*#swagger.tags = ['Customers']
+  #swagger.summary = 'Actualizar un cliente' */ {
   try {
     const id = Number(req.params.id);
 
