@@ -1,7 +1,29 @@
 import pool from "../config/db.js";
 
-export async function obtenerProducto() {
-  const result = await pool.query("SELECT * FROM producto");
+export async function obtenerProducto(
+  maxPrice?: number,
+  page: number = 1,
+  limit: number = 10,
+) {
+  const values: number[] = [];
+  let query = "SELECT * FROM producto";
+
+  if (maxPrice !== undefined) {
+    query += ` WHERE precio <= $${values.length + 1}`;
+    values.push(maxPrice);
+  }
+
+  const offset = (page - 1) * limit;
+
+  query += ` ORDER BY id_producto ASC`;
+  query += ` LIMIT $${values.length + 1}`;
+  values.push(limit);
+
+  query += ` OFFSET $${values.length + 1}`;
+  values.push(offset);
+
+  const result = await pool.query(query, values);
+
   return result.rows;
 }
 export async function obtenerProductoPorId(id: number) {
